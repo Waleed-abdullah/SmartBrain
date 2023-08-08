@@ -8,6 +8,7 @@ import ImageLinkForm from './components/ImageLinkForm/ImageLinkForm';
 import Rank from './components/Rank/Rank';
 import FaceRecognition from './components/FaceRecognition/FaceRecognition';
 import './App.css';
+import Modal from './components/Modal/Modal';
 
 const particlesOptions = {
   particles: {
@@ -27,6 +28,7 @@ const initialState = {
   boxes: [],
   route: 'signin',
   isSignedIn: false,
+  isModalOpen: false,
   user: {
     id: '',
     name: '',
@@ -111,15 +113,20 @@ class App extends Component {
 
   onRouteChange = (route) => {
     if (route === 'signout') {
-      this.setState(initialState);
+      return this.setState(initialState);
     } else if (route === 'home') {
       this.setState({ isSignedIn: true });
     }
     this.setState({ route: route });
   };
 
+  toggleModal = () => {
+    this.setState((prevState) => ({ isModalOpen: !prevState.isModalOpen }));
+  };
+
   render() {
-    const { isSignedIn, imageUrl, route, boxes, user } = this.state;
+    const { isSignedIn, imageUrl, route, boxes, user, isModalOpen } =
+      this.state;
     return (
       <div className="App">
         <Particles className="particles" params={particlesOptions} />
@@ -127,6 +134,7 @@ class App extends Component {
           isSignedIn={isSignedIn}
           onRouteChange={this.onRouteChange}
         />
+        {isModalOpen && <Modal>{'Hellooo'}</Modal>}
         {this.state.route === 'home' ? (
           <React.Fragment>
             <Logo />
