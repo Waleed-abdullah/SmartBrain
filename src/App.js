@@ -9,6 +9,7 @@ import Rank from './components/Rank/Rank';
 import FaceRecognition from './components/FaceRecognition/FaceRecognition';
 import './App.css';
 import Modal from './components/Modal/Modal';
+import Profile from './components/Profile/Profile';
 
 const particlesOptions = {
   particles: {
@@ -35,6 +36,8 @@ const initialState = {
     email: '',
     entries: 0,
     joined: '',
+    pet: '',
+    age: '',
   },
 };
 
@@ -121,7 +124,10 @@ class App extends Component {
   };
 
   toggleModal = () => {
-    this.setState((prevState) => ({ isModalOpen: !prevState.isModalOpen }));
+    this.setState((prevState) => ({
+      ...prevState,
+      isModalOpen: !prevState.isModalOpen,
+    }));
   };
 
   render() {
@@ -133,8 +139,17 @@ class App extends Component {
         <Navigation
           isSignedIn={isSignedIn}
           onRouteChange={this.onRouteChange}
+          toggleModal={this.toggleModal}
         />
-        {isModalOpen && <Modal>{'Hellooo'}</Modal>}
+        {isModalOpen && (
+          <Modal>
+            <Profile
+              isProfileOpen={isModalOpen}
+              toggleModal={this.toggleModal}
+              user={user}
+            />
+          </Modal>
+        )}
         {this.state.route === 'home' ? (
           <React.Fragment>
             <Logo />
