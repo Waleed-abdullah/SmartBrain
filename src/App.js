@@ -147,6 +147,7 @@ class App extends Component {
               isProfileOpen={isModalOpen}
               toggleModal={this.toggleModal}
               user={user}
+              loadUser={this.loadUser}
             />
           </Modal>
         )}
