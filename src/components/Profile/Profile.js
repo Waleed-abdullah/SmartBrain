@@ -26,11 +26,16 @@ function Profile({ toggleModal, user, loadUser }) {
   function onProfileUpdate() {
     fetch(`http://localhost:3000/profile/${user.id}`, {
       method: 'post',
-      headers: { 'Content-Type': 'application/json' },
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: window.sessionStorage.getItem('token'),
+      },
       body: JSON.stringify({ formInput: { ...userData, id: user.id } }),
     }).then((resp) => {
-      toggleModal();
-      loadUser({ ...user, ...userData });
+      if (resp.status === 200 || resp.status === 304) {
+        toggleModal();
+        loadUser({ ...user, ...userData });
+      }
     });
   }
 
