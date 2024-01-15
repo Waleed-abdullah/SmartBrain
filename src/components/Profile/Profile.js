@@ -64,7 +64,7 @@ function Profile({ toggleModal, user, loadUser }) {
             placeholder={user.name}
           />
           <label className="mt2 fw6" htmlFor="user-age">
-            Name:
+            Age:
           </label>
           <input
             onChange={onFormChange}
@@ -75,7 +75,7 @@ function Profile({ toggleModal, user, loadUser }) {
             placeholder={user.age}
           />
           <label className="mt2 fw6" htmlFor="user-pet">
-            Name:
+            Pet:
           </label>
           <input
             onChange={onFormChange}
